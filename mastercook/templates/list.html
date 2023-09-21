@@ -1,0 +1,69 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>master cook</title>
+
+    <style>
+        .card {
+            display: flex; /* Use flexbox to control card layout */
+            margin-bottom: 20px; /* Add margin to separate cards */
+        }
+
+        .card-img {
+            flex: 1; /* Make the image container flex to take up space */
+            max-width: 50%; /* Adjust the width for the image container */
+            max-height: 300px; /* Set a maximum height for the images */
+            object-fit: cover; /* Maintain aspect ratio and crop if necessary */
+        }
+
+        .card-content {
+            flex: 2; /* Make the content container flex to take up more space */
+            max-width: 50%; /* Adjust the width for the image container */
+            max-height: 50px;
+            padding: 5px; /* Add some padding for spacing */
+        }
+
+        .card-title {
+            font-size: 25px; /* Customize the font size for card titles */
+            text-align: left;
+        }
+
+        .btn-view {
+            background-color: red; /* Set the background color to red */
+            border: none;
+            color: white;
+            text-align: left; /* Align the text to the left */
+            text-decoration: none;
+            font-size: 18px; /* Increase the font size */
+            padding: 10px 10px; /* Increase padding for button size */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="cart-column">
+    {% for each in data %}
+    <div class="card">
+        <div class="card-img">
+            <img alt="..." class="card-img" src="{{ each.image_url }}">
+        </div>
+        <div class="card-content">
+            <h5 class="card-title">{{ each.name }}</h5>
+            <h2 class="card-title">INGREDIENTS :{{ each.ingredients }}</h2>
+            <a class="btn-view" href="{% url 'Detail' each.id %}">View</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>
+{% endblock content %}

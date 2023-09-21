@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+        .navbar {
+            background-color: red;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+            padding: 16px 16px;
+            text-decoration: none;
+        }
+
+        /* Add these styles for the search bar */
+.search-bar {
+    float: left;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    margin: 20px;
+    width: 200px; /* Adjust the width as needed */
+    border: none;
+    outline: none;
+}
+
+.search-bar button[type="submit"] {
+    background-color: #333; /* Adjust the background color as needed */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Center the search bar and button horizontally */
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"],
+.search-bar button[type="submit"] {
+    margin: 0 auto;
+}
+
+        .dropdown {
+            float: right;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 20px;
+            border: none;
+            outline: none;
+            color: white;
+            background-color: inherit;
+            margin: 0;
+            padding: 14px 16px;
+            cursor: pointer;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .notification-icon {
+            float: right;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .notification-badge {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 12px;
+            text-align: center;
+            line-height: 20px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: red;
+            height: 100vh; /* 75% of the viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .display-4 {
+            font-weight: bold;
+            font-size: 4rem; /* Adjust the text size as needed */
+            animation: textAnimation 2s ease-in-out infinite alternate;
+            color: white;
+            margin-right: 20px; /* Adjust the spacing between text and images */
+            margin-left: 20px; /* Adjust the spacing between text and images */
+        }
+
+        .image {
+            width: 350px; /* Adjust the image size as needed */
+            height: auto;
+        }
+
+        @keyframes textAnimation {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
+            }
+        }
+        /* Dropdown styles */
+
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="{% url 'list'  %}">Home</a>
+
+
+<!--    <div class="search-bar">-->
+<!--        <input type="text" id="search-input" placeholder="Enter recipe name">-->
+<!--        <button type="submit">Search</button>-->
+<!--    </div>-->
+
+<!--<form id="search-form">-->
+<!--        <input type="text" id="search-input" placeholder="Enter recipe name">-->
+<!--        <button type="submit">Search</button>-->
+<!--    </form>-->
+<!--    <div id="results"></div>-->
+    <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+            <a href="{% url 'Login'  %}">Login</a>
+            <a href="{% url 'Register'  %}">Register</a>
+            <!-- Add logic to show "Logout" when the user is logged in -->
+            <!-- <a href="#">Logout</a> -->
+        </div>
+    </div>
+    <div class="dropdown">
+    <button class="dropbtn">Profile</button>
+    <div class="dropdown-content">
+        <a href="{% url 'profilecreate'  %}">Profile Create</a>
+    </div>
+</div>
+
+
+    </div>
+<header>
+    <div class="container py-5 text-center">
+        <img src="{% static 'image1.png' %}" alt="MasterCook Logo" class="image">
+        <h1 class="display-4">mastercook</h1>
+        <img src="{% static 'image1.png' %}" alt="MasterCook Logo" class="image">
+    </div>
+</header>
+
+<div class="container">
+    {% block content %}
+    {% endblock content %}
+</div>
+<script>
+    // Function to toggle dropdown visibility
+    function toggleDropdown() {
+        var dropdownContent = document.querySelector(".dropdown-content");
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            dropdownContent.style.display = "block";
+        }
+    }
+console.log('Form submitted with search query:', searchQuery);
+
+        // Function to handle form submission
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the search query from the input field
+            const searchQuery = document.getElementById('search-input').value;
+
+            // Make a GET request to the API endpoint with the search query
+            fetch(`/api/recipes/?search=${searchQuery}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the results
+                    const resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = '';
+                    data.forEach(recipe => {
+                        resultsDiv.innerHTML += `<p>${recipe.name}</p>`;
+                    });
+                })
+                .catch(error => console.error(error));
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

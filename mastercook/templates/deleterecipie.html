@@ -1,0 +1,48 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Delete Profile</title>
+    <style>
+
+        .card {
+            text-align: center;
+            padding: 200px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            max-width: 300px;
+            margin: auto;
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Delete Profile</h2>
+        <p>Are you sure you want to delete the recipie  {{ recipie.name }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Yes, Delete</button>
+        </form>
+        <a href="{% url 'list' %}">Cancel</a>
+    </div>
+</body>
+</html>
+{% endblock content %}
+

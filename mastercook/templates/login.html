@@ -1,0 +1,112 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- Include any additional CSS or meta tags here -->
+   <style>
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    max-width: 400px;
+    padding: 60px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.card-title {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.error {
+    color: red;
+    margin-top: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Login</h3>
+                    <form method="post" action="{% url 'login' %}" id="login-form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="emailid">Email:</label>
+                            <input type="text" name="email" id="emailid" class="form-control" placeholder="Enter your email">
+                            {% if form.errors.emailid %}
+                                <p class="text-danger">{{ form.errors.emailid }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="password1">Password:</label>
+                            <input type="password" name="password" id="password1" class="form-control" placeholder="Choose a password">
+                            {% if form.errors.password1 %}
+                                <p class="text-danger">{{ form.errors.password1 }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="post" class="btn btn-primary"><a href=" {% url 'list' %}">Login</button></a>
+                            <a class="btn btn-outline-info" href="{% url 'Register' %}">Create account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+{% endblock content %}

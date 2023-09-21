@@ -1,0 +1,70 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
+</head>
+<style>
+    /* card.css */
+
+.card {
+    width: 1500px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.card-img img {
+    max-width: 50%;
+    height: 50%;
+}
+
+.card-title {
+    font-size: 29px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.card-subtitle {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.ingredient-list {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-content p {
+    font-size: 24px; /* You can adjust the font size as needed */
+}
+
+</style>
+<body>
+<div class="card">
+    <div class="card-img">
+        <img alt="..." class="card-img" src="{{ data.image_url }}">
+    </div>
+    <div class="card-content">
+        <h1 class="card-title">{{ data.name }}</h1>
+        <h2 class="card-subtitle">Ingredients: {{ data.ingredients }}</h2>
+        <h2 class="card-subtitle">Preparation:</h2>
+        <p>{{ data.preparation }}</p>
+    </div>
+</div>
+</body>
+</html>
+{% endblock content %}
+

@@ -1,0 +1,130 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+</head>
+<style>
+    /* registration.css */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.card-title {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.error {
+    color: red;
+    margin-top: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+</style>
+<body>
+<div class="container">
+    <div class="card">
+        <h3 class="card-title">Register</h3>
+        <form method="post" action="{% url 'register' %}" id="reg">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_emailid">Email:</label>
+                <input type="text" name="email" class="form-control" placeholder="Enter your email">
+                {% if form.errors.emailid %}
+                    <p class="error">{{ form.errors.emailid }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" class="form-control" placeholder="Choose a username">
+                {% if form.errors.username %}
+                    <p class="error">{{ form.errors.username }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_firstname">First Name:</label>
+                <input type="text" name="first_name" class="form-control" placeholder="Enter your first name">
+                {% if form.errors.firstname %}
+                    <p class="error">{{ form.errors.firstname }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_lastname">Last Name:</label>
+                <input type="text" name="last_name" class="form-control" placeholder="Enter your last name">
+                {% if form.errors.lastname %}
+                    <p class="error">{{ form.errors.lastname }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Choose a password">
+                {% if form.errors.password1 %}
+                    <p class="error">{{ form.errors.password1 }}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirm Password:</label>
+                <input type="password" name="password" class="form-control" placeholder="Confirm your password">
+                {% if form.errors.password2 %}
+                    <p class="error">{{ form.errors.password2 }}</p>
+                {% endif %}
+            </div>
+            <button type="post" class="btn btn-primary">Sign Up</button></a>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
+{% endblock content %}

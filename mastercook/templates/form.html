@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data" action="/recipie/recipie-create/">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Recipe Name">
+    <textarea name="ingredients" placeholder="Ingredients"></textarea>
+    <textarea name="preparation" placeholder="Preparation"></textarea>
+    <input type="file" name="making_video">
+    <button type="submit">Create Recipe</button>
+</form>
+</body>
+</html>
